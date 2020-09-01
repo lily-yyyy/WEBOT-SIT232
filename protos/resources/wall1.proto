@@ -1,0 +1,29 @@
+PROTO wall1 [
+  field SFVec3f    translation  0.00999069 0.098038 0.503811
+  field SFRotation rotation     -0.9762023252046353 0.17753282214316254 -0.12454363623625032 -8.426098637377087e-18
+  field SFFloat    bodyMass     -1
+  field SFVec3f    size        1 0.2 0.05
+  field SFString   name        "wall"
+  field SFNode     appearance   PBRAppearance{ baseCOlor 0.447059 0.623529 0.811765 roughness 0.5}
+]
+{
+  Solid {
+    translation IS translation
+    rotation IS rotation
+    children [
+      Shape {
+        appearance IS appearance
+        geometry Box {
+          size IS size
+        }
+      }
+      #USE BOX-GEOMETRY
+    ]
+    name IS name
+    boundingObjects USE BOX-GEOMETRY
+    physics Physics {
+      density 1000
+      mass IS bodyMass
+    }
+  }
+}

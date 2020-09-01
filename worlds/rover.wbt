@@ -1,0 +1,63 @@
+#VRML_SIM R2020a utf8
+WorldInfo {
+  basicTimeStep 16
+}
+Viewpoint {
+  orientation -0.47601132435069393 0.7879133804490409 0.3906478260521403 1.6115169958060274
+  position 2.157267772648302 2.736804815123377 0.32402148186542024
+}
+FourWheelsRobot {
+}
+Floor {
+  size 1 1
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+FourWheelsRobot {
+}
+wall4 {
+  translation 0.48778 0.098038 -0.0115028
+  bodyMass 1
+  name "wall(2)"
+  appearance PBRAppearance {
+    roughness 1
+    metalness 0
+  }
+}
+wall1 {
+  translation -0.0113922 0.098038 -0.531501
+  name "wall(1)"
+}
+Solid {
+  translation -0.3524 1.5099e-14 -0.0280819
+  children [
+    DEF BALL Shape {
+      appearance PBRAppearance {
+        baseColor 0.988235 0.913725 0.309804
+        roughness 1
+        metalness 0
+      }
+      geometry Sphere {
+        radius 0.1
+        subdivision 2
+      }
+    }
+  ]
+  boundingObject USE BALL
+  physics Physics {
+    centerOfMass [
+      0 0 0
+    ]
+  }
+}
+wall4 {
+  name "wall(3)"
+  appearance PBRAppearance {
+    roughness 1
+    metalness 0
+  }
+}
+wall1 {
+}
