@@ -1,19 +1,202 @@
 PROTO FourWheelsRobot [
   field SFVec3f    translation  0 0 0
   field SFRotation rotation     0 1 0 0
-  field SFFloat    bodyMass     -1
+  field SFFloat    bodyMass     1
 ]
 {
   Robot {
     translation IS translation
     rotation IS rotation
     children [
-      
+      DistanceSensor"ds_left"{
+        translation 0.025 0 0.1
+        rotation 0 1 0 0.1309
+        children[
+          Shape{
+            appearance Appearance{
+              material Material{
+              diffuseColor 0.447059 0.623529 0.811765
+              }
+            }
+            geometry Box{
+              size 0.01 0.01 0.01
+            }
+          }
+        ]
+        name "ds_left"
+        physics Physics{
+          density 1000
+          mass -1
+        }
+      }
+      DistanceSensor"ds_right"{
+        translation -0.025 0 0.1
+        rotation 0 1 0 0.1309
+        children[
+          Shape{
+            appearance Appearance{
+              material Material{
+              diffuseColor 0.447059 0.623529 0.811765
+              }
+            }
+            geometry Box{
+              size 0.01 0.01 0.01
+            }
+          }
+        ]
+        name "ds_right"
+        physics Physics{
+          density 1000
+          mass -1
+        }
+      }
+      HingeJoint{
+        jointParameters HingeJointParameters{
+          anchor -0.06 0 -0.05
+        }
+        device[
+          RotationalMotor"WHEEL4"{
+            name "WHEEL4"
+          }
+        ]
+        endPoint DEF WHEEL4 Solid{
+          translation -0.06000078151188709 4.429285717756977e-06 -0.04998442647755935
+          rotation 7.85044787527954e-16 -7.85044787527954e-17 1 1.5707999999999938
+          children[
+            DEF WHEEL Shape{
+              appearance Appearance{
+                material Material{
+                diffuseColor 0.541176 0.886275 0.203922
+                }
+              }
+              geometry Cylinder{
+                height 0.02
+                radius 0.04
+              }
+            }
+          ]
+          name "solid(3)"
+          boundingObject USE WHEEL
+          physics DEF WHEEL_PH Physics{
+            density 1000
+            mass -1
+          }
+        }
+      }
+      HingeJoint{
+        jointParameters HingeJointParameters{
+          anchor -0.06 0 0.05
+        }
+        device[
+          RotationalMotor"WHEEL3"{
+            name "WHEEL3"
+          }
+        ]
+        endPoint DEF WHEEL3 Solid{
+          transaltion -0.06 0 0.05
+          rotation -0.6895451269415822 0.6895476597869109 -0.22147582891483214 3.5775062318912316
+          children[
+            DEF WHEEL Shape{
+              appearance Appearance{
+                material Material{
+                diffuseColor 0.541176 0.886275 0.203922
+                }
+              }
+              geometry Cylinder{
+                height 0.02
+                radius 0.04
+              }
+            }
+          ]
+          name "solid(2)"
+          boundingObject USE WHEEL
+          physics DEF WHEEL_PH Physics{
+            density 1000
+            mass -1
+          }
+        }
+      }
+      HingeJoint{
+        jointParameters HingeJointParameters{
+          anchor 0.06 0 0.05
+        }
+        device[
+          RotationalMotor"WHEEL1"{
+            name "WHEEL1"
+          }
+        ]
+        endPoint DEF WHEEL1 Solid{
+          transaltion 0.06 0 0.05
+          rotation 4.846729135359777e-10 -4.846744836255527e-10 1 1.5707999999999913
+          children[
+            DEF WHEEL Shape{
+              appearance Appearance{
+                material Material{
+                diffuseColor 0.541176 0.886275 0.203922
+                }
+              }
+              geometry Cylinder{
+                height 0.02
+                radius 0.04
+              }
+            }
+          ]
+          
+          boundingObject USE WHEEL
+          physics DEF WHEEL_PH Physics{
+            density 1000
+            mass -1
+          }
+        }
+      }
+      HingeJoint{
+        jointParameters HingeJointParameters{
+          anchor 0.06 0 -0.05
+        }
+        device[
+          RotationalMotor"WHEEL2"{
+            name "WHEEL2"
+          }
+        ]
+        endPoint DEF WHEEL2 Solid{
+          transaltion 0.06 0 -0.05
+          rotation 1.1775671812919308e-15 0 1 1.5707999999999946
+          children[
+            DEF WHEEL Shape{
+              appearance Appearance{
+                material Material{
+                diffuseColor 0.541176 0.886275 0.203922
+                }
+              }
+              geometry Cylinder{
+                height 0.02
+                radius 0.04
+              }
+            }
+          ]
+          name "solid1"
+          boundingObject USE WHEEL
+          physics DEF WHEEL_PH Physics{
+            density 1000
+            mass -1
+          }
+        }
+      }
+      DEF BODY Shape{
+        appearance Appearance{
+          material Material{
+            diffuseColor 0.643137 0 0
+          }
+        }
+        geometry Box{
+          size 0.1 0.05 0.2
+        }
+      }
     ]
     boundingObject USE BODY
     physics Physics {
       density -1
-      mass IS bodyMass
+      mass -1
     }
     controller "four_wheels_collision_avoidance"
   }
